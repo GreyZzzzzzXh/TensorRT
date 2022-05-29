@@ -31,39 +31,40 @@ set(PLUGIN_SOURCES)
 set(PLUGIN_CU_SOURCES)
 
 set(PLUGIN_LISTS
-    batchTilePlugin
-    batchedNMSPlugin
-    coordConvACPlugin
-    cropAndResizePlugin
-    decodeBbox3DPlugin
-    detectionLayerPlugin
-    disentangledAttentionPlugin
-    efficientNMSPlugin
-    efficientNMSPlugin/tftrt
-    flattenConcat
-    generateDetectionPlugin
-    gridAnchorPlugin
-    groupNormalizationPlugin
-    instanceNormalizationPlugin
-    leakyReluPlugin
-    multilevelCropAndResizePlugin
-    multilevelProposeROI
-    multiscaleDeformableAttnPlugin
-    nmsPlugin
-    normalizePlugin
-    nvFasterRCNN
-    pillarScatterPlugin
-    priorBoxPlugin
-    proposalLayerPlugin
-    proposalPlugin
-    pyramidROIAlignPlugin
-    regionPlugin
-    reorgPlugin
-    resizeNearestPlugin
-    scatterPlugin
-    specialSlicePlugin
-    splitPlugin
-    voxelGeneratorPlugin
+    gridSamplerPlugin
+    # batchTilePlugin
+    # batchedNMSPlugin
+    # coordConvACPlugin
+    # cropAndResizePlugin
+    # decodeBbox3DPlugin
+    # detectionLayerPlugin
+    # disentangledAttentionPlugin
+    # efficientNMSPlugin
+    # efficientNMSPlugin/tftrt
+    # flattenConcat
+    # generateDetectionPlugin
+    # gridAnchorPlugin
+    # groupNormalizationPlugin
+    # instanceNormalizationPlugin
+    # leakyReluPlugin
+    # multilevelCropAndResizePlugin
+    # multilevelProposeROI
+    # multiscaleDeformableAttnPlugin
+    # nmsPlugin
+    # normalizePlugin
+    # nvFasterRCNN
+    # pillarScatterPlugin
+    # priorBoxPlugin
+    # proposalLayerPlugin
+    # proposalPlugin
+    # pyramidROIAlignPlugin
+    # regionPlugin
+    # reorgPlugin
+    # resizeNearestPlugin
+    # scatterPlugin
+    # specialSlicePlugin
+    # splitPlugin
+    # voxelGeneratorPlugin
     )
 
 # Add BERT sources if ${BERT_GENCODES} was populated
