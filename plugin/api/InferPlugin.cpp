@@ -28,38 +28,39 @@
 using namespace nvinfer1;
 using namespace nvinfer1::plugin;
 
-#include "batchTilePlugin.h"
-#include "batchedNMSPlugin.h"
-#include "coordConvACPlugin.h"
-#include "cropAndResizePlugin.h"
-#include "decodeBbox3D.h"
-#include "detectionLayerPlugin.h"
-#include "efficientNMSPlugin.h"
-#include "tftrt/efficientNMSImplicitTFTRTPlugin.h"
-#include "tftrt/efficientNMSExplicitTFTRTPlugin.h"
-#include "flattenConcat.h"
-#include "generateDetectionPlugin.h"
-#include "gridAnchorPlugin.h"
-#include "instanceNormalizationPlugin.h"
-#include "lReluPlugin.h"
-#include "multilevelCropAndResizePlugin.h"
-#include "multilevelProposeROIPlugin.h"
-#include "multiscaleDeformableAttnPlugin.h"
-#include "nmsPlugin.h"
-#include "normalizePlugin.h"
-#include "nvFasterRCNNPlugin.h"
-#include "pillarScatter.h"
-#include "priorBoxPlugin.h"
-#include "proposalLayerPlugin.h"
-#include "proposalPlugin.h"
-#include "pyramidROIAlignPlugin.h"
-#include "regionPlugin.h"
-#include "reorgPlugin.h"
-#include "resizeNearestPlugin.h"
-#include "scatterPlugin.h"
-#include "specialSlicePlugin.h"
-#include "split.h"
-#include "voxelGenerator.h"
+#include "gridSamplerPlugin.h"
+// #include "batchTilePlugin.h"
+// #include "batchedNMSPlugin.h"
+// #include "coordConvACPlugin.h"
+// #include "cropAndResizePlugin.h"
+// #include "decodeBbox3D.h"
+// #include "detectionLayerPlugin.h"
+// #include "efficientNMSPlugin.h"
+// #include "tftrt/efficientNMSImplicitTFTRTPlugin.h"
+// #include "tftrt/efficientNMSExplicitTFTRTPlugin.h"
+// #include "flattenConcat.h"
+// #include "generateDetectionPlugin.h"
+// #include "gridAnchorPlugin.h"
+// #include "instanceNormalizationPlugin.h"
+// #include "lReluPlugin.h"
+// #include "multilevelCropAndResizePlugin.h"
+// #include "multilevelProposeROIPlugin.h"
+// #include "multiscaleDeformableAttnPlugin.h"
+// #include "nmsPlugin.h"
+// #include "normalizePlugin.h"
+// #include "nvFasterRCNNPlugin.h"
+// #include "pillarScatter.h"
+// #include "priorBoxPlugin.h"
+// #include "proposalLayerPlugin.h"
+// #include "proposalPlugin.h"
+// #include "pyramidROIAlignPlugin.h"
+// #include "regionPlugin.h"
+// #include "reorgPlugin.h"
+// #include "resizeNearestPlugin.h"
+// #include "scatterPlugin.h"
+// #include "specialSlicePlugin.h"
+// #include "split.h"
+// #include "voxelGenerator.h"
 
 using nvinfer1::plugin::RPROIParams;
 
@@ -169,44 +170,45 @@ extern "C"
 {
     bool initLibNvInferPlugins(void* logger, const char* libNamespace)
     {
-        initializePlugin<nvinfer1::plugin::BatchTilePluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::BatchedNMSPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::BatchedNMSDynamicPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::CoordConvACPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::CropAndResizePluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::CropAndResizeDynamicPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::DecodeBbox3DPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::DetectionLayerPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::EfficientNMSPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::EfficientNMSONNXPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::EfficientNMSExplicitTFTRTPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::EfficientNMSImplicitTFTRTPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::FlattenConcatPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::GenerateDetectionPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::GridAnchorPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::GridAnchorRectPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::InstanceNormalizationPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::LReluPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::MultilevelCropAndResizePluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::MultilevelProposeROIPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::MultiscaleDeformableAttnPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::NMSPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::NMSDynamicPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::NormalizePluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::PillarScatterPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::PriorBoxPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::ProposalLayerPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::ProposalPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::ProposalDynamicPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::PyramidROIAlignPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::RegionPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::ReorgPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::ResizeNearestPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::RPROIPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::ScatterNDPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::SpecialSlicePluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::SplitPluginCreator>(logger, libNamespace);
-        initializePlugin<nvinfer1::plugin::VoxelGeneratorPluginCreator>(logger, libNamespace);
+        initializePlugin<nvinfer1::plugin::GridSamplerPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::BatchTilePluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::BatchedNMSPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::BatchedNMSDynamicPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::CoordConvACPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::CropAndResizePluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::CropAndResizeDynamicPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::DecodeBbox3DPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::DetectionLayerPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::EfficientNMSPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::EfficientNMSONNXPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::EfficientNMSExplicitTFTRTPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::EfficientNMSImplicitTFTRTPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::FlattenConcatPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::GenerateDetectionPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::GridAnchorPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::GridAnchorRectPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::InstanceNormalizationPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::LReluPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::MultilevelCropAndResizePluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::MultilevelProposeROIPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::MultiscaleDeformableAttnPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::NMSPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::NMSDynamicPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::NormalizePluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::PillarScatterPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::PriorBoxPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::ProposalLayerPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::ProposalPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::ProposalDynamicPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::PyramidROIAlignPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::RegionPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::ReorgPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::ResizeNearestPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::RPROIPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::ScatterNDPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::SpecialSlicePluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::SplitPluginCreator>(logger, libNamespace);
+        // initializePlugin<nvinfer1::plugin::VoxelGeneratorPluginCreator>(logger, libNamespace);
         return true;
     }
 } // extern "C"
